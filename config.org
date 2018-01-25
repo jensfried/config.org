@@ -1,0 +1,90 @@
+* Packages 
+** Package auto install 
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.milkbox.net/packages/")
+	     t)
+(add-to-list 'package-archives
+	     '("marmalade" . "http://marmalade-repo.org/packages/")
+	     t)
+
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+#+END_SRC
+
+** Packages
+#+BEGIN_SRC emacs-lisp
+(use-package auto-complete
+  :ensure t)
+
+(use-package nlinum-relative
+  :ensure t
+  :init (global-nlinum-relative-mode))
+
+(use-package autopair
+  :ensure t
+  :init (autopair-global-mode))
+
+(use-package undo-tree
+  :ensure t
+  :init (global-undo-tree-mode))
+
+(use-package evil
+  :ensure t
+  :init (evil-mode t))
+
+(use-package powerline
+  :ensure t
+  :init (powerline-center-theme)
+  :config (setq powerline-default-separator 'wave))
+
+(use-package powerline-evil
+  :ensure t)
+
+(use-package neotree
+  :ensure t)
+
+(use-package multiple-cursors
+  :ensure t)
+
+(use-package beacon
+  :ensure t
+  :init (when window-system (beacon-mode)))
+
+(use-package magithub
+  :ensure t)
+
+(use-package org-bullets
+  :ensure t
+  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
+#+END_SRC
+
+* Keybindings
+#+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key (kbd "C-+") 'mc/mark-next-like-this)
+(global-set-key (kbd "C--") 'mc/mark-previous-like-this)
+(global-set-key [f8] 'neotree-toggle)
+(global-set-key [f12] 'projectile-find-file)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-/") 'undo-tree-visualize)
+#+END_SRC
+
+* Variables
+#+BEGIN_SRC emacs-lisp
+(ac-config-default)
+(setq ring-bell-function 'ignore)
+(setq scroll-conservatively 100)
+(setq inhibit-startup-message t)
+(when window-system (global-hl-line-mode t))
+(when window-system (setq frame-title-format "emacs"))
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+#+END_SRC
