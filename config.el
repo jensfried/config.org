@@ -1,25 +1,20 @@
-* Packages 
-** Package auto install 
-#+BEGIN_SRC emacs-lisp
+
 (require 'package)
 
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.milkbox.net/packages/")
-	     t)
+             '("melpa" . "https://melpa.milkbox.net/packages/")
+             t)
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/")
-	     t)
+             '("marmalade" . "http://marmalade-repo.org/packages/")
+             t)
 
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-#+END_SRC
 
-** Packages
-#+BEGIN_SRC emacs-lisp
 (use-package auto-complete
   :ensure t)
 
@@ -79,10 +74,7 @@
 (use-package evil-surround
   :ensure t
   :config (global-evil-surround-mode 1))
-#+END_SRC
 
-* Keybindings
-#+BEGIN_SRC emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-+") 'mc/mark-next-like-this)
 (global-set-key (kbd "C--") 'mc/mark-previous-like-this)
@@ -91,10 +83,7 @@
 (global-set-key [f11] 'counsel-projectile-switch-project)
 (global-set-key [f12] 'counsel-projectile-find-file)
 (global-set-key (kbd "M-m") 'magit-status)
-#+END_SRC
-  
-* Variables
-#+BEGIN_SRC emacs-lisp
+
 (ac-config-default)
 (setq ring-bell-function 'ignore)
 (setq scroll-conservatively 100)
@@ -104,4 +93,3 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-#+END_SRC

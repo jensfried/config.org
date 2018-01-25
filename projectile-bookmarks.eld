@@ -1,0 +1,1 @@
+("~/.emacs.d/" "~/code/test_app/" "~/code/dj/")
