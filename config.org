@@ -23,9 +23,9 @@
 (use-package auto-complete
   :ensure t)
 
-(use-package nlinum-relative
+(use-package linum-relative
   :ensure t
-  :init (global-nlinum-relative-mode))
+  :init (linum-relative-global-mode))
 
 (use-package autopair
   :ensure t
@@ -44,9 +44,6 @@
   :init (powerline-center-theme)
   :config (setq powerline-default-separator 'wave))
 
-(use-package powerline-evil
-  :ensure t)
-
 (use-package neotree
   :ensure t)
 
@@ -64,8 +61,20 @@
   :ensure t
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
 
-(use-package helm-projectile
+(use-package ivy
+  :ensure t
+  :init (ivy-mode 1))
+
+(use-package ivy-hydra
   :ensure t)
+
+(use-package counsel-projectile
+  :ensure t
+  :init (counsel-projectile-mode))
+
+(use-package which-key
+  :ensure t
+  :init (which-key-mode))
 #+END_SRC
 
 * Keybindings
@@ -74,11 +83,11 @@
 (global-set-key (kbd "C-+") 'mc/mark-next-like-this)
 (global-set-key (kbd "C--") 'mc/mark-previous-like-this)
 (global-set-key [f8] 'neotree-toggle)
-(global-set-key [f12] 'projectile-find-file)
-(global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-/") 'undo-tree-visualize)
+(global-set-key [f11] 'counsel-projectile-switch-project)
+(global-set-key [f12] 'counsel-projectile-find-file)
 #+END_SRC
-
+  
 * Variables
 #+BEGIN_SRC emacs-lisp
 (ac-config-default)
